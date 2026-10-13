@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你是加缪笔下的哪个人物？</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body {
+            background: #f7f9fc;
+            color: #222;
+            padding: 20px 15px;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        .container {
+            background: #fff;
+            border-radius: 18px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+        }
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 8px;
+            color:#2c3e50;
+        }
+        .desc {
+            text-align:center;
+            color:#666;
+            margin-bottom:30px;
+            font-size:15px;
+            line-height:1.6;
+        }
+        .question {
+            margin-bottom: 26px;
+        }
+        .q-title {
+            font-weight:600;
+            margin-bottom:12px;
+            font-size:16px;
+        }
+        .option-item {
+            padding:12px 14px;
+            border:1px solid #e2e8f0;
+            border-radius:10px;
+            margin-bottom:9px;
+            cursor:pointer;
+            transition:0.2s;
+        }
+        .option-item:hover {
+            background:#edf2f7;
+        }
+        .option-item.selected {
+            background:#4299e1;
+            color:#fff;
+            border-color:#4299e1;
+        }
+        #submitBtn {
+            width:100%;
+            padding:14px;
+            background:#2b6cb0;
+            color:white;
+            border:none;
+            border-radius:12px;
+            font-size:17px;
+            font-weight:600;
+            cursor:pointer;
+            margin-top:10px;
+        }
+        #submitBtn:disabled {
+            background:#cbd5e0;
+            cursor:not-allowed;
+        }
+        .result-box {
+            display:none;
+            margin-top:25px;
+        }
+        .res-title {
+            font-size:20px;
+            font-weight:bold;
+            text-align:center;
+            margin-bottom:14px;
+        }
+        .res-desc {
+            line-height:1.7;
+            font-size:15px;
+        }
+        .final-quote {
+            margin-top:24px;
+            padding:16px;
+            background:#f0f7ff;
+            border-radius:12px;
+            text-align:center;
+            font-weight:500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 加缪哲学人格小测试</h1>
+        <div class="desc">假如你身处加缪的文学世界，面对荒诞的人生，你会成为哪一位人物？凭第一直觉选择✨</div>
+
+        <div id="quizWrap">
+            <!-- Q1 -->
+            <div class="question" data-q="1">
+                <div class="q-title">1.遭遇世间荒谬不公的事，你的第一反应是？</div>
+                <div class="option-item" data-val="A">🕶️ 不辩解不表演，看穿世俗规则的虚伪，坦然做自己</div>
+                <div class="option-item" data-val="B">🤍 哪怕看不到结果，依然坚持做认为正确的事，力所能及去帮助他人</div>
+                <div class="option-item" data-val="C">🤔 向内反思，会怀疑自己是否也有过错，陷入自我审视</div>
+                <div class="option-item" data-val="D">🔥 既然世界本就荒诞，那一切世俗规则都不值得被遵守</div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question" data-q="2">
+                <div class="q-title">2.你如何看待人生的本质？</div>
+                <div class="option-item" data-val="A">🌫️ 人生本没有预设的意义，坦然接纳这份虚无就好</div>
+                <div class="option-item" data-val="B">💪 意义不会凭空降临，要靠日复一日的行动去创造</div>
+                <div class="option-item" data-val="C">🫂 人生充满误解、愧疚与人性的虚伪，很难做到纯粹</div>
+                <div class="option-item" data-val="D">💥 一切都是虚无，所有的努力最终都会归于毁灭</div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question" data-q="3">
+                <div class="q-title">3.当你陷入巨大痛苦、压力爆棚时，通常会？</div>
+                <div class="option-item" data-val="A">🌙 选择沉默独处，不向外宣泄情绪，拒绝情绪表演</div>
+                <div class="option-item" data-val="B">🛠️ 不摆烂逃避，继续踏实做事，默默扛住苦难</div>
+                <div class="option-item" data-val="C">🌀 反复复盘过往，不断自我怀疑，进行自我审判</div>
+                <div class="option-item" data-val="D">⚡ 叛逆摆烂，否定一切，想要挣脱所有束缚</div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question" data-q="4">
+                <div class="q-title">4.面对大众舆论与世俗评价，你会？</div>
+                <div class="option-item" data-val="A">🚫 拒绝迎合他人期待，忠于内心的真实感受</div>
+                <div class="option-item" data-val="B">🧭 保持理性，尽力引导身边人走向善良与正义</div>
+                <div class="option-item" data-val="C">👁️ 看透众人面具之下的虚伪，洞悉人性的复杂</div>
+                <div class="option-item" data-val="D">😒 蔑视世俗大众，不屑于遵从群体的标准</div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question" data-q="5">
+                <div class="q-title">5.关于反抗荒诞，你的态度是？</div>
+                <div class="option-item" data-val="A">👀 做清醒的旁观者，不主动抗争，也不随波逐流</div>
+                <div class="option-item" data-val="B">✨ 明知世事艰难，依旧温柔坚定地反抗苦难</div>
+                <div class="option-item" data-val="C">⚖️ 警惕反抗本身，反抗也可能使人堕入虚伪</div>
+                <div class="option-item" data-val="D">🗡️ 想要彻底颠覆一切，用极端方式打破现状</div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question" data-q="6">
+                <div class="q-title">6.以下哪一种人生状态最贴合你？</div>
+                <div class="option-item" data-val="A">🧊 清醒疏离，不喜伪装，活得真实坦荡</div>
+                <div class="option-item" data-val="B">🌱 温柔坚韧，在困境之中持续行动</div>
+                <div class="option-item" data-val="C">📖 敏感自省，背负内心的沉重与愧疚</div>
+                <div class="option-item" data-val="D">🌪️ 追求绝对自由，带着虚无感叛逆不羁</div>
+            </div>
+
+            <button id="submitBtn" disabled>提交查看结果</button>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div class="res-title" id="resTitle"></div>
+            <div class="res-desc" id="resDesc"></div>
+            <div class="final-quote">
+                💡 加缪哲学的终极答案：<br>
+                <strong>认清世界荒诞之后，依然选择行动与热爱，这就是人的最高自由。</strong>
+            </div>
+        </div>
+    </div>
+
+<script>
+const resultData = {
+    A: {
+        title: "🕶️ 默尔索 · 局外人人格",
+        desc: `<strong>哲学内核：纯粹的荒诞主义者</strong><br>
+你看透社会仪式化的虚伪，不愿意迎合世俗的表演。<br>
+对应加缪早期思想：世界本就是荒诞的，拒绝伪装，忠于自我。<br>
+> 哲学定位：最早窥见荒诞的人，清醒疏离，但尚未走向主动反抗。`
+    },
+    B: {
+        title: "🤍 里厄医生 · 温柔反抗者",
+        desc: `<strong>哲学内核：西西弗斯式的反抗人格✨</strong><br>
+你明白世界充满苦难荒诞，但依然选择善良、担当与行动。<br>
+这是加缪最为推崇的理想人格。<br>
+> 哲学定位：不逃避荒诞，在无意义的世界里亲手创造属于自己的意义。`
+    },
+    C: {
+        title: "🤔 克拉芒斯 · 自省堕落者",
+        desc: `<strong>哲学内核：现代知识分子的愧疚与虚伪</strong><br>
+你善于审视人性，看见自己与他人的懦弱、遗憾，常常陷入自我审判。<br>
+对应加缪后期反思：世间最大的荒诞，不止是外部苦难，更是人性自身的虚伪。<br>
+> 哲学定位：洞悉人性深渊，清醒，却也背负沉重的精神枷锁。`
+    },
+    D: {
+        title: "🔥 卡利古拉 · 虚无叛逆者",
+        desc: `<strong>哲学内核：荒诞催生的虚无主义⚠️</strong><br>
+认清世界没有终极意义之后，走向否定一切、追求绝对自由。<br>
+这是加缪用来警示世人的反面范本：认清荒诞不等于走向毁灭式叛逆。<br>
+> 哲学定位：误入虚无的深渊，是反抗的反面。`
+    }
+}
+
+let answers = {};
+const optionItems = document.querySelectorAll('.option-item');
+const submitBtn = document.getElementById('submitBtn');
+const resultBox = document.getElementById('resultBox');
+const resTitle = document.getElementById('resTitle');
+const resDesc = document.getElementById('resDesc');
+
+optionItems.forEach(item=>{
+    item.addEventListener('click',()=>{
+        const q = item.parentElement.dataset.q;
+        const val = item.dataset.val;
+        // 清除这一题其他选中
+        item.parentElement.querySelectorAll('.option-item').forEach(o=>o.classList.remove('selected'));
+        item.classList.add('selected');
+        answers[q]=val;
+        // 判断是否全部6题完成
+        submitBtn.disabled = Object.keys(answers).length !==6;
+    })
+})
+
+submitBtn.addEventListener('click',()=>{
+    //统计最多选项
+    const count = {A:0,B:0,C:0,D:0};
+    Object.values(answers).forEach(v=>count[v]++);
+    let maxKey = Object.keys(count).reduce((a,b)=>count[a]>count[b]?a:b);
+    const res = resultData[maxKey];
+    resTitle.innerHTML = res.title;
+    resDesc.innerHTML = res.desc;
+    document.getElementById('quizWrap').style.display='none';
+    resultBox.style.display='block';
+})
+</script>
+</body>
+</html>
